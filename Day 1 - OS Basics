@@ -1,0 +1,137 @@
+Range Considerations
+  The 10.0.0.0/8 subnet is used for range management and configuration.
+
+User Mode vs. Kernel Mode
+  In user mode, the code being executed can only run a limited set of safe instructions, and cannot directly access any of the system’s hardware. 
+  In kernel mode, the code being executed by the CPU has unrestricted access to all of the system’s hardware.
+
+System Calls
+  The user mode program makes a system call to the OS; the system call contains details about the file that the program wishes to access. 
+  Upon receipt of the system call, the OS triggers an interrupt within the CPU — the CPU saves the state of the original user mode program, and performs a context switch from user mode to kernel mode. 
+
+System Calls vs. Library Calls
+  A library is a software module that implements some functionality and makes that functionality available to other programs by exposing it through an interface.
+
+Protection Rings
+  This is usually done through the implementation of a protection ring model. 
+  In this model, ring 0 represents the operations with the highest privileges over the system (CPU kernel mode operations). 
+  Incrementally higher rings represent operations with fewer privileges (extending up to ring 3 in most common OSs).
+
+Programs
+  A program is a set of human-readable instructions that are intended for eventual execution on a computer. Programs are often referred to as source code.
+
+Executables
+  An executable — also known as an image — is a type of file that contains machine instructions that a CPU can actually execute; these instructions are written in a low-level machine language, like assembly.
+
+Processes
+  A process is an instance of a running executable that the kernel has loaded into memory and started executing. Several processes can be instantiated from the same executable
+
+Threads
+  A thread is the smallest unit within a process that can be assigned for execution on the CPU. A process may contain multiple threads, each of which share the pool of system resources that the kernel has allocated to the process.
+
+Process Structure in Memory
+  During process creation, the OS allocates a block of memory to be used by that process. 
+  All of that process’s execution of code operations occurs within this memory block, which is divided into five main parts: text, data, Block Started by Symbol (BSS), heap, and stack.
+  An additional piece of a process’s memory is reserved for use by the OS, and is used when the OS takes operations to manage that process.
+
+Text: Contains the machine instructions loaded from the executable. 
+  This is the actual set of instructions that the CPU executes
+
+Data: Stores any variables that were initialized by the programmer or compiler.
+  The initialization process requires the compiler to know how much memory is needed to store the variable, as well as the initial, non-zero value of the variable.
+
+BSS: Used to store variables that have been instantiated, but not initialized. 
+  This means that the compiler is able to determine how much memory is needed to store a variable, but the program has not set its value, or has set its value explicitly to zero.
+
+Heap: Used to dynamically allocate memory for variables whose sizes cannot be known until runtime, i.e., the actual execution of the program. 
+  This usually occurs when the size of the variable differs each time the program is run, so the compiler cannot assign a chunk of memory to the variable right off the bat. 
+  The heap can freely grow and shrink during program execution.
+
+Stack: Last In, First Out (LIFO) data structure used to store stack frames, which contain information about the current execution sta te of the process. 
+  If a process has multiple threads, each thread is given its own stack. As an example, imagine that a thread is currently executing function1(), which contains a call to another function, function2(). 
+  When the call to function2() occurs, the current state of function1() is saved into the stack frame for function1() and placed on top of the stack. 
+  Then, a new stack frame is created to initialize function2(), itself being placed on top of the stack. 
+  When function2() eventually completes, execution is returned to function1() by loading the saved function1() stack frame, which includes loading the code within function1() that lies directly after the call to function2().
+
+Daemon Processes
+  The root process is responsible for loading every other process necessary for the system to function. 
+  Usually, the root process delegates some of these responsibilities by spawning other processes known as daemon processes, or daemons, which manage certain components across the entire OS. 
+  For example, a network daemon might handle all network communication for the OS.
+
+  On Windows machines, daemon processes are referred to as services.
+
+Windows Filesystems
+  File Allocation Table (FAT) is a basic filesystem that uses a specific construct to reference files stored on a disk. FAT comes in several variants.
+  Notably, FAT filesystems have no built-in security mechanisms; FAT filesystems do not hold any information about the permissions that should be associated with each file.
+
+New Technology File System
+  New Technology File System (NTFS) is a journaling filesystem originally developed by Microsoft to replace FAT in Windows NT 3.1. 
+  NTFS has undergone several revisions during its lifetime, and provides several enhancements to filesystem performance, efficiency, capacity, resilience, and security.
+  Journaling filesystems can more easily deal with problems caused by unintended interruptions, such as a power outage.
+  A journaling filesystem keeps a journal, a small historical record of operations that are currently being performed within the filesystem.
+
+Linux Filesystems
+  
+  Extended Filesystem
+      According to Jim Salter’s Understanding Linux filesystems article, the Extended Filesystem (ext) was created one year after the initial release of the Linux OS.
+  
+  XFS
+      XFS is the default filesystem for Red Hat Enterprise Linux — a common Linux distribution. It offers similar features to ext4.
+  
+  ZFS
+     ZFS is considered a next-generation filesystem because of several fundamental changes in its approach to storage volume management.
+
+Index Nodes
+  The Linux kernel supports a large variety of filesystems compared to other OSs. 
+  This is because of a construct called the index node (inode) that exists as an abstraction layer within the Linux kernel. 
+  Inodes are an integral part of the Linux kernel; all file management behavior within Linux OSs deals directly with these inodes, requiring only that the Linux VFS perform small translation steps between the Linux kernel and the underlying concrete filesystem.
+
+  Hard Links
+      When a regular file is created on a Linux machine, the filesystem creates a new record for the file within its record list, and provides a unique ID number back to the Linux kernel. 
+      The kernel uses this ID number as the inode ID; the inode ID number is used by the kernel to perform operations against the file located on the filesystem.
+
+      Making a hard link to a file creates a new file as normal, but instead of its own inode, the hard link directly references the inode of a different file. 
+
+  Symbolic Links
+      Symbolic links, also known as symlinks or softlinks, reference a file by that file’s name and location on the filesystem, rather than its inode value 
+      Advantages of symlinks include creating a link to directory locations, and to files or directory locations located on a completely different filesystem. 
+      This is in contrast to hard links, which can only reference a file as directory locations do not have their own inode values.
+  
+      Unfortunately, symlinks do have a drawback; because a symlink does not reference an inode value, moving or deleting the target of the symlink (i.e., the file or directory location that the symlink is referencing) breaks the symlink
+
+Network Management
+  Network devices or network interfaces are specialized hardware peripherals that enable the transmission of data between two or more systems. 
+  In modern systems, basic networking interfaces are usually built directly into that system’s hardware.
+  
+  Sockets
+    A socket is a virtual construct that acts as the endpoint for a communication link on the system. 
+    Many sockets can be open on the system at a given time. 
+    A client application that is running on the system can request a socket from the kernel, and use system calls to read or write data to the socket.
+
+  Socket System Calls
+    The following system calls (syscalls) are used by an application to request and utilize a socket. 
+
+    bind
+    listen
+    accept
+    connect
+    recv or recvfrom
+    send or sendto
+    close
+
+Forensic Principals
+  In contrast to law enforcement investigations, the goal of a cyber defense operation is more likely to be the prevention, detection, or mitigation of MCA. 
+  When these steps fail, cyber defense operations pivot and perform swift identification and eradication of MCA as well as the implementation of additional measures to prevent, detect, or mitigate similar MCA in the future.
+
+Indicators of Compromise
+  Indicators of Compromise (IOC) are forensic artifacts that serve as evidence that an intrusion has occurred within a host or network. 
+  File metadata sometimes contains IOC information that can aid a forensic or security investigation.
+
+File Hashes 
+  A file hash is a unique value that is calculated by running a file’s contents through a hashing function. 
+  Manipulating even one bit of a file is enough to change the entire resulting hash value, making file hashes incredibly useful for forensic and security investigations.
+  Locating a file hash associated with a known malicious file is strong evidence that MCA has occurred. 
+
+
+
+
