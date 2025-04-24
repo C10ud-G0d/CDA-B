@@ -1,0 +1,73 @@
+Capabilities Analysis Overview
+  The CPT Capability Analysis and Force Allocation step involves determining the mission capabilities of each element. 
+  The elements included in this process are the CPT, mission partners, and the operational planning section.
+
+  Capability planning
+  Force availability, selection, preparation
+  Force presentation and available effects
+  Objectives, effects, and guidance refinement
+  Course of action development
+  CPT Rules of Engagement (ROE) development
+  Assessment plan
+  Service interruption coordination
+  Operational Impact Validation (OIV)
+
+Capability Planning
+    Using the PLANORD or TASKORD, the CPT develops a tactical mission statement and a projected end state, defines initial tactical objectives, and determines initial capabilities for the mission.
+ 
+Force availability, selection, preparation
+  Once CPT MA is completed, available CPT forces are examined to determine CPT mission accomplishment capability. 
+  The scope of the proposed mission and other on-going CPT requirements factor into mission element and crew selection. 
+  Specifically, CPT leadership examines the team members’ experience, proficiency, and training levels, as well as administrative readiness status against the number of personnel required to complete the mission as determined during CPT MA.
+
+Force presentation and available effects
+  Once CPT Mission Element crews and required equipment are determined (CPT MA determines whether selected capabilities work with the supported commander’s networks and systems)
+
+Objectives, Effects, and Guidance Refinement
+  If MA by the operational planning section or CPT determines the CPT is unable to achieve all objectives or create all desired effects as articulated in the PLANORD, the operational planning section is responsible for refining objectives and desired effects in coordination with the supported commander and CPT. 
+
+Course of Action Development
+  MA products drive Course of Action (COA) development. 
+  Whether unique or standardized, COAs describe operational approaches and provide options to achieve the mission end state.
+  A COA describes who takes action, what type of action occurs, how the action occurs (i.e., method), when and where the action takes place (i.e., timing and tempo), and why the action is required (i.e., purpose). 
+  Products from COA development present alternatives including sketches allowing COA visualization by higher ranking and supported headquarters’ commanders and planners.
+
+CPT Rules of Engagement (ROE) development
+  During this step, the operational planning section and supported commander, advised by the CPT, develop the CPT mission ROE, constraints, and restraints.
+  Effects from CPT hunt and clear operations may potentially disrupt or degrade MRT-C performance. 
+  During operations, it is critical the CPT continually advises all parties involved regarding capabilities to be employed, and possible unintended or cascading effects.
+
+Assessment Plan
+  The assessment plan validates the CPT plan by outlining Measures of Performance (MOP) for operational tasks and Measures of Effectiveness (MOE) for operational objectives and desired effects, and can also prove the engagement area in a deliberate defense.
+
+Service interruption coordination
+  Service interruptions are necessary for the deployment of passive network taps as well as any in-line, network-based capabilities, such as intrusion prevention or encrypted traffic decryption capabilities. 
+  Additional service interruptions may be coordinated for configuration changes within the MRT-C to enable CPT operations, such as deployment of agent-based capabilities, whitelisting CPT applications and scripts, modifying Group Policy Objects (GPO) to enable remote access for CPTs, 
+  enabling event log forwarding, modifying network configurations (e.g., assigning IP space to the CPT, modifying routes, creating span ports, adding Media Access Control [MAC] addresses to port security configurations, etc.), 
+  turning on NetFlow, and other network log collection.
+
+Operational Impact Validation
+  OIV verifies the impact of service interruptions to the supported commander’s protected networks or systems; validates CPT capabilities creating desired effects on mission partner systems from unintended or cascading effects; 
+  and captures representative data sets (e.g., databases or files; security, network, or host configurations; anticipated network traffic; etc.) enabling follow-on tactical planning.
+
+Mission Capabilities and Requirements
+
+Discovery and Counter Infiltration (D&CI)
+  D&CI is the detection, illumination, and defeat of known or unknown threats within a secured network or system. 
+  Hunting methodologies are utilized heavily with D&CI. 
+  To be successful with missions involving D&CI capabilities, CPTs should have clear PIR and supporting Essential Elements of Information (EEI) to drive collection requirements and efforts.
+
+Cyber Threat Emulation
+  CTE is the process of using known adversary Tactics, Techniques, and Procedures (TTP) to replicate real-world threats to train and measure the effectiveness of cybersecurity defenses. 
+  This capability is primarily associated with Department of Defense (DoD) red teams to highlight vulnerabilities and demonstrate operational impact for the purpose of improving cybersecurity postures.
+
+Threat Mitigation
+  In this capability, the CPT provides a comprehensive review of the mission partner’s MRT-C with a focus on threat TTPs. 
+  CPTs assess secured network cybersecurity posture and processes to identify specific threats in vulnerable areas and to provide mitigative measures.
+
+Data Collection Plans
+  Before data can be collected, the CPT must know what the data collection requirements are. 
+  This is mission-dependent and can vary across different mission sets. 
+  Defining data collection requirements requires the ability to identify gaps in currently collected data, determine what data needs to be collected, and know where that data can be found.
+
+  
