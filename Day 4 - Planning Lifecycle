@@ -1,0 +1,91 @@
+Planning Lifecycle Overview
+
+Three possible triggers to initiate the CPT operations process:
+Threat Intelligence 
+    Threat intelligence reporting or warning intelligence may trigger hunt, clear, enable hardening, and assessment functions by the CPT.
+ Campaign Plan
+    CPT employment in support of Combatant Command (CCMD) campaign plans is intended to increase critical asset protection prior to operational need.
+ MCA
+    Whether discovered by local network protection assets, network owners, or indicated by threat intelligence reporting, CPT hunting and clearing entails conducting reconnaissance and counter-reconnaissance on supported commanders’ networks or systems to gain and maintain contact with an adversary or further develop a situation.
+
+The first step of the CPT OP is Objectives, Effects, and Guidance. When conditions or requirements trigger a CPT mission, the operational planning section determines the appropriate CPT functions and capabilities before developing preliminary objectives, intended effects, and commander’s guidance. 
+The operational planning section is also responsible for assessing existing command relationships and making recommendations for potential additions or changes to facilitate and enable the CPT mission.
+
+Once a trigger has been identified a determination for mission need is required. If a mission is required, a PLANORD and TASKORD is developed. 
+
+PLANORD=
+Objectives, intended effects, and commander’s guidance are disseminated via a Planning Order (PLANORD) – or other similar service-specific orders document – to the CPT, the supported commander, and the local network protectors, if applicable. 
+
+PLANORDs are followed by a TASKORD.
+
+TASKORD=
+TASKORD is, “A method used to task and to disseminate to components, subordinate units, and command and control agencies projected targets and specific missions. 
+In addition, the tasking order provides specific instructions concerning the mission planning agent, targets, and other control agencies, as well as general instructions for accomplishment of the mission.” 
+Accordingly the TASKORD documents the supported commander’s or organization’s requirement to collect initial network diagrams, terrain information, design documentation, previous operational and penetration test results, and configuration information for CPT use in the next step of the OP. 
+
+TASKORD Overview
+  Planning for a CPT operation begins with the issuance of a PLANORD or TASKORD. 
+  The PLANORD and TASKORDs provide specific instructions concerning the mission planning agent, targets, and control agencies, as well as general instructions for accomplishment of the operation. 
+
+From there, the CPT analyzes the PLANORD, TASKORD, Mission Analysis (MA) results, Mission Relevant Terrain in Cyberspace (MRT- C), and the supported commander’s existing risk management, mission defense, and Incident Response (IR) plan(s), if available. 
+Using the provided information and their analysis of it, the CPT develops a tactical mission statement, end state, defines initial tactical objectives, and determines initial capabilities for the mission. 
+
+BREAKING DOWN A TASKORD
+
+Section 1 of the TASKORD covers the situation of the task. Section 1 provides the CPT with background and context for what and why the task is being issued. CPTs can find a mission summary and the area of concern here.
+
+Section 2A of the TASKORD defines the intent, purpose, method, and end accomplishment(s) of the task. The Commander’s Intent is the overview of the mission and the applicable actions the CPT takes in the task. The Purpose defines the goals and objectives of the task. The Method defines how the task is executed. The End State defines what constitutes completion of the task. 
+
+Section 2B of the TASKORD provides a list of sub-tasks that are required in support of the overall goal of the TASKORD. 
+
+Section 3 of the TASKORD defines administrative and logistical information. Section 3 can include anything noteworthy pertaining to the specific site or mission funding.
+
+Section 4 of the TASKORD defines the primary command and control for the mission. 
+
+Section 5 of the TASKORD defines the ROE. The ROE are parameters that the CPT must follow, and includes parameters such as areas of the network that should not be accessed and tools that can/cannot be used on the network. 
+
+By adding enriching data and graphical control measures to network maps produced during the previous step, the CPT further improves terrain visualization during planning and operations to enable a common operating picture to emerge, and create shared situational awareness between the CPT, the supported commander, and local network protection assets.
+
+Data Collection
+
+  The planning phase includes data collection of artifacts, such as:
+  Network Diagrams
+  Terrain Information
+  Configuration Information
+
+Network Diagrams
+  Network diagrams are a visual representation of the systems and connections the CPT operates on during the mission. Network diagrams streamline the mission by cutting out the time or effort to make assumptions about the network
+
+Terrain Information
+  Terrain, which covers all of cyberspace, includes the logical and physical components. 
+  When defining terrain, Defensive Cyberspace Operations (DCO) team members should use Key Terrain in Cyberspace (KT-C), MRT-C, Task Critical Asset (TCA), and Defense Critical Asset (DCA) as outlined in United States Cyber Command (USCC) Operational Guidance on Identification of Mission Relevant Terrain in Cyberspace.
+
+  Terrain analysis is the collection, analysis, evaluation, and interpretation of geographic (physical) and digital (virtual) information on the natural and man-made features of the terrain — combined with other relevant factors — to predict the effect of the terrain on military operations.
+
+  Terrain Identification, during the planning lifecycle of the CPT OP utilizes the collection portion of terrain analysis. Terrain information including terrain identification is covered in a lesson later in this course. 
+
+Configuration Information
+  Configuration information refers to the details and settings of the machines and devices used on the network. Configuration information can refer to both physical and logical details and settings. 
+  Physical configuration information can include data points such as the location of servers, machines, or network devices and the type of hardware making the connection between machines. 
+  Logical configuration information can include data points such as Operating Systems (OS), firmware and firewall versions, and Active Directory (AD) users and groups. 
+  Configuration information can also include data points containing the Points of Contact (POC) that are responsible for the configurations. 
+
+Request for Information Overview
+  Throughout the Planning process, questions may arise pertaining to details and specifics about the mission. 
+  An RFI is a document that an organization sends to customers to request specific information or clarification on information regarding the mission. 
+  While not always necessary for every mission, an RFI provides clarity for the information in question that is both technical and/or non-technical. 
+  During the planning lifecycle of the CPT OP, CPTs collect a vast amount of data points and information. 
+  Some of the collected information may not be complete, which leads CPTs to make assumptions based on the need for more clarification to make the collected information complete. 
+  Assumptions are things not known, which need to be known to accomplish the plan or mission.
+
+RFI Format
+  RFIs do not need to follow a specific format or template. RFIs need to include requests for information that impacts how an operation is executed. 
+  The information in the request can pertain to any of the topics covered in the TASKORD or in the operation as a whole, topics can include: intent, purpose, end state, tasks, logistics, command, or control. 
+  The RFI will include the contact information for the site personnel responsible with receiving and processing the RFI. 
+
+Preparing Questions for RFIs
+  Upon review of TASKORDs and information collected from the customer, questions and assumptions may arise. 
+  Information that is not answered in the TASKORD, the data collection artifacts, or in a site survey should be the foundation for these questions. 
+  The TASKORD and supporting data included during Mission Analysis, step 2 of the CPT OP, define the critical points and strategy in the operation. 
+  Questions that directly impact the topics covered in the TASKORD must be asked and included in RFIs. 
+
