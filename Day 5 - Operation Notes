@@ -1,0 +1,30 @@
+OPNOTES Overview
+
+OPNOTEs are important to the investigative and reporting lifecycle throughout the Cyberspace Operations (CO) process. 
+It is vital that each of the participating CDAs record standardized OPNOTEs.
+They must be clear and concise including, but not limited to, the following:
+  Time/date
+  Host name
+  Internet Protocol
+  Description
+
+Providing context to the action or artifact enables readers to understand severity, scale, and scope of what is being described. 
+
+Producing fact-based, evidence-supported notes of actions performed supports a defensible timeline. 
+This timeline could be used to deconflict activity performed outside the investigating team.
+
+Date and Time
+  Recording the date and time of the event or discovery of the artifact is important. 
+
+Subject
+ The Subject column header describes the subject of the findings or related artifacts.
+
+Description
+  ﻿Always use concise, precise, and accurate information when describing the important action or artifact.
+
+Supporting Information
+  This column header refers to files of various types, which pertain to and support information listed in the Subject column.
+
+Tags
+ The Tags column is used to electronically mark one or more notes with a single attribute. 
+
