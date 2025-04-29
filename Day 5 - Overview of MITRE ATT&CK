@@ -1,0 +1,5 @@
+What is the ATT&CK Framework?
+
+  MITRE’s ATT&CK is a framework for modeling cyber threat adversary behaviors in their varied complexity. 
+  It consists of a knowledge base of known behaviors, which characterizes those behaviors both at a high level for conceptual understanding and with the granular historical detail required to see how the model correctly fits actual attacks that have occurred. 
+  The model reflects the various phases of an adversary’s attack lifecycle and the platforms they are known to target, but is free from the rigidity of a linear attack chain.
