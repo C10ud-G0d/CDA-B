@@ -1,0 +1,74 @@
+PowerShell
+
+ Built on .NET Framework
+PowerShell ISE allows users to utilize menu items and keyboard shortcuts to perform many of the same tasks that are executed in the Windows PowerShell console. 
+For example, when debugging a script in PowerShell ISE, to set a line breakpoint in a script — a way to pause the execution of a script to perform debugging —, right-click the line of code, and select Toggle Breakpoint.
+
+The PowerShell scripting environment was designed to extend the capabilities of the Command shell to run PowerShell commands, called cmdlets. 
+Cmdlets are similar to Windows commands, but provide a more extensible scripting language. 
+Windows commands and PowerShell cmdlets are both able to be run in PowerShell, however, the Command shell can only run Windows commands and not PowerShell cmdlets.
+
+Cmdlets: Cmdlets perform common system administration tasks such as managing the registry, services, processes, event logs, and using Windows Management Instrumentation (WMI).
+
+Task-oriented: PowerShell scripting language is task-based and provides support for existing scripts and CLI tools.
+
+Consistent design: As cmdlets and system data stores use common syntax, and have common naming conventions, data sharing is easy. The output from one cmdlet can be pipelined to another cmdlet without manipulation.
+
+Simple to use: Simplified, command-based navigation lets users navigate the registry and other data stores similar to the file system navigation.
+
+Object-based: PowerShell possesses powerful object manipulation capabilities. Objects can be sent to other tools or databases directly.
+
+Extensible interface: PowerShell is customizable as independent software vendors and enterprise developers can build custom tools and utilities using PowerShell to administer their software.
+
+
+Cmdlets are .NET Framework class objects; not just stand-alone executables.
+Cmdlets are easily constructed from as few as a dozen lines of code.
+Parsing, error presentation, and output formatting are not handled by cmdlets. 
+It is done by the PowerShell runtime.
+Cmdlets process works on objects not on text stream, and objects can be passed as output for pipelining.
+Cmdlets are record-based as they process a single object at a time.
+
+
+PowerShell scripts are stored in .ps1 files.
+
+The Get-ExecutionPolicy command returns one of the following values:
+
+  Restricted: No scripts are allowed (individual commands are still permitted). This is the default setting for workstations and client systems; it appears the first time the command is executed.
+  AllSigned: Run scripts signed by a trusted developer. With this setting in place, before executing, a script confirms that you want to run it.
+  RemoteSigned: Run your own scripts or scripts signed by a trusted developer. This is the default policy for servers. Scripts running remotely or those downloaded from the internet still must be signed by a trusted publisher.
+  Unrestricted: Run any script you want.
+
+Cmdlet Format (VERBS)
+
+Get: To get something
+Set: To define something
+Start: To run something
+Stop: To stop something that is running
+Out: To output something
+New: To create something (new is not a verb, of course, but it functions as one)
+
+      VERB NOUN relationship
+
+ex    GET HELP
+      GET CHILDITEM
+      SET EXECUTIONPOLICY
+
+Pipelines
+  A pipeline is a series of commands connected by pipeline operators (|) (American Standard Code for Information Interchange [ASCII] 124). 
+  Each pipeline operator sends the results of the preceding command to the next command.
+
+
+
+Cmdlets parameters accept pipeline input in one of two different ways:
+
+ByValue
+  The parameter accepts values that match the expected .NET type or that can be converted to that type.
+  For example, the Name parameter of Start-Service accepts pipeline input by value. 
+  It can accept string objects or objects that can be converted to strings.
+
+ByPropertyName
+  The parameter accepts input only when the input object has a property with the same name as the parameter.
+  For example, the Name parameter of Start-Service can accept objects that have a Name property. 
+  To list the properties of an object, pipe it to Get-Member.
+
+
