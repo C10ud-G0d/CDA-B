@@ -1,0 +1,28 @@
+Often localized variables in a batch file use lowercase variable names while system-wide environmental variables are uppercase. 
+
+Generally, the setx command should only be used when permanently altering the environment variable is desired. 
+
+%%variable HAS TO BE IN A BATCH FILE
+
+IF STATEMENTS
+
+FOR STATEMENTS
+  The for command is used to iterate each item in a set and perform some action/command. 
+  The variable used as the iterator — %variable in the above command outline — is a single character in the range a-z or A-Z, and is referenced as %%a or %%Z (%%z and %%Z are different variables).
+  
+  /l: Series of values
+  /f: Series of files
+  /d: Series of directories
+  /r: Each item in a directory tree recursively
+
+SYNTAX for /l %%variable in (start,step,end) do (command)
+
+EXAMPLE for /l %%A in (0,2,10) do echo %%A
+
+This example iterates recursively through each file in the directory %USERPROFILE%. A filter can also be applied to only look for files that end in .bat:
+
+SYNTAX for /r "%USERPROFILE%" %%D in (*) do echo %%D
+
+EXAMPLE for /r "%USERPROFILE%" %%D in (*.bat) do echo %%D
+
+
