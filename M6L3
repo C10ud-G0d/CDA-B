@@ -1,0 +1,54 @@
+WMI Architecture
+  WMI is a valuable tool for system administrators to aid in configuring local and remote Windows systems, but it is also frequently abused by threat actors during MCAs. 
+  Threat actors continue to use WMI to aid in discovery and remote execution as a part of lateral movement. 
+  WMI relies on the WMI service for local/remote access, Server Message Block (SMB), and Remote Procedure Calls (RPC), over Transmission Control Protocol (TCP) port 135, to function. 
+  Put simply, this means WMI uses TCP port 135 to initiate communication with the remotely managed host, then switches to any random high port anywhere between TCP port 1024-65535. 
+  Some of the data threat groups can gain from using WMI include obtaining a list of all domain administrators, identifying any installed antivirus software, and listing all the running processes. 
+
+  WMI consists of three main components: WMI providers and the associated managed objects, WMI infrastructure, and WMI consumers or management applications such as WMIC and PowerShell. 
+  The implementation of WMI provides a consistent standard framework for interacting with various objects and management data. 
+  The WMI API converts the standard interface into the various system and library calls associated with the specific providers handling the managed objects.
+
+  CLASS = OBJECT
+
+only going to worry about ROOT\CIMV2
+
+IF USING WMIC remotely you need 3 switches, /NODE:<machine id list>, /USER:<userid> and /PASSWORD:<password>
+
+wmic path win32_account get /all /format:list
+  
+
+The Win32_Account class contains both system accounts and user accounts. 
+WMIC has an alias for each type of account, so in order to retrieve the same information as in the previous commands, two aliases commands must be run:
+
+  wmic sysaccount get /all /format:list 
+
+  wmic useraccount get /all /format:list
+
+IMPORTANT ALIAS'S
+
+Sysaccount     -System accounts
+Useraccount    -User accounts
+Process        -Processes
+Service        -Services
+rdtoggle       -Remote Desktop Protocol
+
+wmic process where ”Name like 'svchost%'” get name,processid,parentprocessid,commandline
+
+The main PowerShell cmdlet to interact with WMI is the Get-CIMInstance cmdlet. 
+
+There are many other cmdlets to interact with common objects such as processes, active directory, events, users, and services. 
+It is important for analysts to be aware of the differences returned from the various PowerShell cmdlets. 
+
+SYNTAX Get-CIMInstance -ClassName Win32_Process SYNTAX
+
+SYNTAX wmic process list brief SYNTAX
+
+If you see win32_process you can not use list brief
+
+SYNTAX wmic process where processid=2564 call getowner SYNTAX
+
+call getowner gets whoever started process
+
+SYNTAX wmic process where name="notepad.exe" get /all /format:list SYNTAX
+
