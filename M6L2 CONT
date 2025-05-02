@@ -1,0 +1,63 @@
+FIND Command
+  The find command searches for files in a directory hierarchy from a specified starting point, or multiple starting points, in the directory tree.
+
+
+GREP and EGREP Commands
+  The grep command searches the named input file for lines containing a match to the given pattern. If no files are specified, or if the file - is given, grep searches standard input.
+
+  -r, --recursive — Read all files under each directory, recursively
+  -i, --ignore-case — Ignore case distinction in both the PATTERN and the input files
+  -w, --word-regexp — Only return lines containing matches that form whole words
+  -x, --line-regexp — Only return matches that exactly match the whole line
+  -c, --count — Suppress normal output and only print a count of matching lines for each input file
+
+CAT Command
+  The cat command concatenates files and prints on the standard output.
+
+-n, --number — Number all output lines
+
+CUT Command
+  The cut command removes sections from each line of a file. 
+
+  -b, --bytes=LIST — Select only these bytes
+  -c, --characters=LIST — Select only these characters
+  -d, --delimiter=DELIM — Use DELIM instead of TAB for field delimiter
+  -f, --fields=LIST — Select only these fields; also print any line that contains no delimiter character, unless -s option is specified
+  -s, --only-delimited — Only print lines that contain delimiters
+  --output-delimiter=STRING — Use STRING as the output delimiter; the default is to use the input delimiter
+  -z, --zero-terminated — Line delimiter is NULL, not newline
+
+ SYNTAX cut -d ":" -f1,7 /etc/passwd SYNTAX
+
+etc/passwd
+username:password:user ID:group ID:user name or comment:home directory: command interpreter or shell
+
+TR Command
+  The tr command translates or delete characters from standard input
+
+SORT Command
+  The sort command sorts lines of text files to standard output, or from standard input if no files are specified.
+
+DIFF Command
+  The diff command compares files line by line to identify differences.
+
+SLEEP Command
+  The sleep command delays for a specified amount of time. This is useful if there is a task happening in the background or a script needs to wait a specified amount of time before doing another task.
+
+WATCH Command
+  The watch command runs a command repeatedly, displaying its output and errors, which allows you to watch the programs output change over time.
+
+LSOF Command
+  The lsof command, or LiSt Open Files, lists standard output file information about files opened by processes.
+
+TIMEOUT Command
+  The timeout command runs a command with a time limit and kills it if still running after a set duration.
+
+SED Command
+  The sed stream editor performs basic text transformations on an input stream (a file or input from a pipeline).
+
+AWK and GAWK Commands
+  The awk and gawk commands are used for pattern scanning and processing of files and standard input. 
+
+  SYNTAX awk 'BEGIN { FS=":" }; {print $1,$7}' /etc/passwd SYNTAX
+
