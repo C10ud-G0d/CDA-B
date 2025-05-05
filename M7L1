@@ -1,0 +1,15 @@
+PowerShell scripting is greatly enhanced by producing your own classes, properties, and methods. Classes can be instantiated to produce objects - though, these are not the only types of objects in PowerShell.
+
+Objects in PowerShell include:
+
+Classes
+PSCustomObject
+Hashtables
+
+Import-module then give .ps1 of class
+
+Get-Childitem -Path C:\ -Include XmlLite.dll -File -Recurse -ErrorAction SilentlyContinue
+
+(Get-ProcessesWithModules | Where ProcessName -eq "Explorer").Modules | Sort
+
+(Get-ProcessesWithModules | Where ProcessName -eq "Explorer").Modules | where {$_.length -eq 12}
