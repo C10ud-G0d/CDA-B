@@ -1,0 +1,5 @@
+RDP is related to termservice or service alias
+
+When running WMIC commands start at ************* get /all /format:list ************ then use list brief
+
+Syntax wmic /node:"ip" /user:"user" /passsword:"password" useraccount get /all /format:list
