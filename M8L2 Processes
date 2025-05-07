@@ -1,0 +1,104 @@
+What is a Process?
+  A process is an executing program — typically based on the Portable Execution (PE) file format — isolated from other running programs on the same system.
+
+A process has numerous elements including:
+  A private virtual memory space
+  An executable program image
+  Handles to kernel objects
+  A security token
+  A unique Process Identifier (PID)
+  One or more threads to execute instructions
+
+Virtual Memory Space
+  In Windows, memory space is divided into an area that user-mode processes access and a second area that is used exclusively by the kernel and kernel processes. 
+  The user mode virtual memory space is further divided between running processes. 
+  Each process’s user mode virtual memory space is private to that process; no processes are able to directly access another process’s virtual memory space.
+
+The Windows Memory Manager, part of the kernel space Executive, decides where each process’s data is mapped in the computer’s physical RAM, or if it is stored on the computer’s hard drive in a process known as Paging.
+
+Paging is the process by which Windows stores infrequently accessed information for processes on a system’s hard drive — in what is known as a paging file — freeing up space in the computer’s physical RAM. 
+This promotes processing speed because accessing information in RAM is faster than information on the hard drive. 
+When a process needs to access information stored in the paging file, a page fault occurs and Windows loads the necessary data from the page file into RAM.
+
+Although each process receives the same range of addresses within their private virtual memory space, processes are not guaranteed to use the same memory addresses within that private memory space each time they are run. 
+Modern Windows processes take advantage of Address Space Layout Randomization (ASLR). 
+ASLR is a security mechanism that instructs the Windows loader randomize the base memory address of executables and the position of libraries, heap, and the stack in a processes' address space. 
+ASLR is primarily intended to defend against memory-based exploits like buffer overflows by eliminating an exploit’s ability to rely on hardcoded memory addresses
+
+Handles to Kernel Objects
+  Kernel objects are, generally speaking, the system elements Windows exposes to user processes to allow them to perform a wide array of actions within the system. 
+  
+  Any action that involves interaction with a computer’s hardware requires assistance from the kernel.
+
+  A process maintains a table of handles so it can access other resources on the system. 
+  In the case of kernel objects, handles are how programs are able to identify kernel elements and send instructions for performing the actions mentioned above. 
+  Handles are often used in conjunction with Windows API calls to access the details of a process, thread, or file.
+
+When a handle for a kernel object is sought, the Executive’s object manager instantiates the requested kernel object. 
+Kernel objects maintain a reference counter, which keeps track of how many processes are interacting with it. 
+Every time a handle is retrieved for a kernel object, its reference counter is incremented by one. 
+Each time a handle is released by a process, its reference counter is decremented by one. When the reference counter reaches zero, the kernel object is destroyed and its memory freed.
+
+Security Token
+  When a user logs into Windows, the system generates and associates a security token with that user account. 
+  Each process that user starts receives the security token, which includes the identity and privileges of the user account. 
+  Windows uses the process’s security token to determine whether it is allowed to interact with a given resource, such as a file, or engaged in a privileged act. 
+  Security tokens contain a range of information, such as the Security Identifier (SID) of the originating user account, the SIDs for the groups which the account is a member, and a list of privileges held by that user or that user’s groups.
+
+What is a Windows Thread?
+  A thread is a type of entity within a process that actually executes instructions within a process. 
+  Without at least one thread, processes are unable to function, and modern Windows processes typically have multiple threads at any given time. 
+  Each created process starts with one primary thread, which may then spawn additional threads. 
+  Each thread shares the process’s virtual memory space and system resources with other threads.
+
+Memory
+  Each new thread receives its own memory stack which it uses to store local variables and return addresses of functions it calls. 
+  Memory can also be dynamically allocated by a thread, which would be in the process’s heap; dynamic memory is shared between threads, while the stack memory is not.
+
+Execution Context
+  A thread’s context stores all the information the thread needs to execute its instructions, such as the value registers contained in the Instruction Pointer (Extended Instruction Pointer [EIP] on 32-bit systems and Return Instruction Pointer [RIP] on 64-bit systems).
+  Because a Central Processing Unit (CPU) core can only execute one instruction from a thread at a time, processors need to switch between executing different threads frequently.
+
+Thread Local Storage (TLS)
+  TLS provides a mechanism for a thread to store data relevant only to it — without needing to share that information across other threads.
+
+Security Token
+  By default, a thread inherits the security token held by the process in which it spawns. However, threads also have the ability to impersonate another account, which allows them to access resources and perform privileged actions within the impersonated user’s security context.
+
+Thread ID
+  Like processes, threads also have unique IDs that other applications can use to identify specific threads and create handles pointing to them. 
+  A thread ID is only unique for as long as a thread exists; once a thread has finished executing, its ID is relinquished and can be reused by the system for a new thread.
+
+State
+  Each thread has a state which represents whether it is currently executing instructions. 
+  For example, some states include: 
+  Ready (meaning the thread is available for the OS to execute it), 
+  Standby (meaning the thread has been selected as the next thread to execute), 
+  Wait (meaning the thread is currently paused and waiting for an operation to complete or a resource to become free), and 
+  Running (meaning the thread is currently executing).
+
+
+
+
+Get-Process -name [name] -IncludeUserName
+
+or
+
+Get-CimInstance -class Win32_Process -filter "name = '[name]'" | Invoke-CimMethod -MethodName GetOwner
+The -filter flag filters output on the query which follows. Queries take on the format "[property] = [value]"The Invoke-CimMethod cmdlet uses the WMI GetOwner method to retrieve the username of the process
+
+Local Security Authority Subsystem Service — lsass.exe
+  This process is responsible for enforcing security policy on the system, including logon verification, password policy, writing to Windows security logs, and the creation of access tokens. 
+  Credentials are often stored in lsass process memory for use by accounts during a login session. 
+  Since it contains those credentials, dumping lsass memory is a valued target of threat actors during the following types of attacks:
+    MITRE ATT&CK OS Credential Dumping: LSASS Memory T1003.001
+    MITRE ATT&CK Boot or Logon Autostart Execution: LSASS Driver T1547.008
+    MITRE ATT&CK Modify Authentication Process T1556
+
+Service Host Process — svchost.exe
+  Svchost.exe is a generic host process name for services that run from DLLs. Since DLLs cannot be run directly, the service host process is an executable shell that loads the Windows services libraries and executes them. 
+  There are often many svchost.exe entries in a running process list because if a single process was hosting every necessary Windows service, then the failure of that process would cause OS failure. 
+  So individual services are started from discrete instances of the service host process. 
+
+Since this process is commonly seen but simultaneously poorly understood by the average user, this process name is a frequent target of masquerade by threat actors to attempt to hide through obfuscation, which is described in MITRE technique ID T1036.005 Masquerading
+
