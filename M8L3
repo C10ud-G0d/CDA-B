@@ -1,0 +1,27 @@
+
+CMD
+List all libraries loaded for the explorer.exe process: SYNTAX  tasklist /fi "imagename eq explorer.exe" /m  SYNTAX
+
+List all libraries loaded for the wmiprvse.exe process on a remote computer: SYNTAX  tasklist /s 172.16.3.2 /u Administrator /fi "imagename eq wmiprvse.exe" /m  SYNTAX
+
+POWERSHELL
+
+To view DLLs loaded by the explorer.exe process on the local machine, run the following command: SYNTAX  Get-Process “explorer” | Select-Object -ExpandProperty Modules -ErrorAction SilentlyContinue | Format-Table -Autosize  SYNTAX
+
+
+Target Selection
+  CreateToolhelp32Snapshot
+  Process32First
+  Process32Next
+  OpenProcess
+
+
+Memory Allocation
+  VirtualAllocEx
+  WriteProcessMemory
+
+Remote Thread Creation
+  CreateRemoteThread
+  NtCreateThreadEx
+  RtlCreateUserThread
+
