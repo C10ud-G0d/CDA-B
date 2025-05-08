@@ -1,0 +1,97 @@
+The Windows Sysinternals Autoruns tool searches through many of these locations and registry keys and is used to assist in monitoring and detecting changes to the baseline configuration set by an organization. 
+
+Techniques:
+System Monitor (Sysmon) and Process Monitor (Procmon) are other tools in the Sysinternals suite used interactively and in unattended modes to monitor for these types of changes, but require tuning and filtering to not overload logging.
+
+The MITRE ATT&CK framework details the following techniques specifically associated with the Windows registry:
+
+  T1012 Query Registry: Through a variety of tools, threat groups access the registry to query for system configuration data to include security credentials, users, permissions, antivirus or host intrusion detection/protection software, and other system profiling datahttps://attack.mitre.org/techniques/T1012/
+
+  T1112 Modify Registry: Through a variety of methods, threat groups interact with the Windows registry to hide configuration information within registry keys, remove information as part of cleaning up, or as part of other techniques to aid in persistence and executionhttps://attack.mitre.org/techniques/T1112/
+
+  T1552.002 Unsecured Credentials: Credentials in Registry: Threat groups search the registry on compromised systems for insecurely stored credentialshttps://attack.mitre.org/techniques/T1552/002/
+
+  T1574.001 Boot or Logon Autostart Execution: Registry Run Keys/Startup Folder: Threat groups modify the registry to achieve persistence by adding a program to a startup folder or referencing it with a registry run keyhttps://attack.mitre.org/techniques/T1547/001/
+
+  T1574.011 Hijack Execution Flow: Services Registry Permissions Weakness: Threat groups execute their own malicious payloads by hijacking the registry entries used by services, use flaws in the permissions for registry to redirect from the originally specified executable to one that they control, in order to launch their own code at service start, and change local service configuration information in the registryhttps://attack.mitre.org/techniques/T1574/011/
+
+Mitigations:
+  M1024 Restrict Registry Permissions: Restrict the ability to modify certain hives or keys in the Windows registryhttps://attack.mitre.org/mitigations/M1024/ 
+
+Registry Description
+
+The registry is a vital piece of Windows systems and holds the vast majority of configuration data for the Operating System (OS) and applications. 
+It includes settings for the system and for each user. 
+Registry data is read during the following principal events:
+
+Initial boot: The boot loader reads the list of boot device drivers to load into memory
+
+Kernel boot: The kernel reads settings that specify which device drivers to load and settings for other subsystems (memory manager, process manager, etc.)
+
+Log on: During a user’s log on, File Explorer reads per-user settings from the registry (includes drive-letter mappings, wallpaper, screensaver, desktop appearance, etc.)
+
+Application startup: Applications read systemwide and per-user settings during startup (can include licenses, menu and toolbar settings, recent documents, and other application settings)
+
+The HKU root key contains the profile settings for all users with a profile on the current system, based on their Security Identifier (SID). 
+
+
+SYNTAX Get-ItemProperty -PATH Registry::HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run | select * -Exclude PS* SYNTAX
+
+
+
+Common registry key IOC locations:
+HKLM\Software\Microsoft\Windows\CurrentVersion\Run
+HKCU\Software\Microsoft\Windows\CurrentVersion\Run
+HKLM\Software\Microsoft\Windows\CurrentVersion\RunOnce
+HKCU\Software\Microsoft\Windows\CurrentVersion\RunOnce
+HKLM\Software\Microsoft\Windows\CurrentVersion\RunOnceEx (not created by default on Windows Vista and newer, but can be created by MCAs or system administrators)
+HKCU\Software\Microsoft\Windows NT\CurrentVersion\Run (legacy; older versions of Windows)
+
+
+By default, the value of a RunOnce key is deleted before the command is run. If the value name is prefixed with an exclamation point (!), the deletion is deferred until after the command runs. 
+If the value name is prefixed with an asterisk (*), the program starts in Safe mode, which is not the default.
+
+The following list shows registry keys used to set Startup folder items for persistence:
+HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders
+HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders
+HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders
+HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders
+
+The following list shows registry keys used to control automatic startup of services during boot:
+HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunServicesOnce
+HKCU\Software\Microsoft\Windows\CurrentVersion\RunServicesOnce
+HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunServices
+HKCU\Software\Microsoft\Windows\CurrentVersion\RunServices
+
+Policy settings can be set to specify startup programs in these registry keys:
+HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer\Run
+HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\Run
+
+Custom actions can be added to the Winlogon key to add additional actions that occur on a computer system running Windows 7 and later:
+HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\Userinit
+HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\Shell
+
+Hive - folder for sub registries e.g HKLM, HKCU, HKCC
+
+Changes that an attacker may make can be detected by watching for changes to the HKLM\SAM\SAM\DOMAINS\Account\Users\Names\<accountname> keys (Sysmon Event Identifier [ID] 12). 
+Validating when new users are added and changes to the Local Administrators group (HKLM\SAM\SAM\Domains\Builtin\Aliases\0000220\) can identify rogue accounts and MCA (Sysmon Event ID 13). 
+
+CMD SYNTAX
+Adds a registry entry
+SYNTAX reg add HKLM\Software\Microsoft\Windows\CurrentVersion\Run /v test /t REG_SZ /d “c:\Windows\System32\notepad.exe” SYNTAX
+
+Powershell SYNTAX
+queries a registry
+SYNTAX Get-ItemProperty -Path HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run SYNTAX
+
+adds a registry entry
+SYNTAX Set-ItemProperty -path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run' -Name 'test' -value 'C:\Windows\System32\notepad.exe' SYNTAX 
+
+
+Powershell syntax to go across the wire to Get-ItemProperty
+SYNTAX Invoke-Command -ComputerName cda-dc -Credential $cred -Command {Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList'} SYNTAX 
+
+The Invoke-Command cmdlet uses the capabilities of PowerShell to run commands on remote systems and takes advantage of the domain trust relationship for authentication. 
+The system to run the command on is specified by -ComputerName cda-dc with the logon credentials supplied from the variable saved by the Get-Credential cmdlet in Step 9. 
+The actual command to execute is enclosed in braces ({…}) and is the same command run locally to retrieve the profile list from the registry.
+
