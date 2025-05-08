@@ -1,0 +1,131 @@
+Powershell 
+certutil -adca
+
+CMD
+sc query
+sc QC
+
+system event 12 and 13 are important
+
+Every program that starts on a system posts a notification in an event log, and every well-behaved program posts a notification before it stops.
+
+Every system access, security change, non-standard OS behavior, hardware failure, and driver malfunction all end up in one event log or another.
+
+
+Modern Windows systems store logs in the %SystemRoot%\System32\winevt\logs directory by default in the binary Extensible Markup Language (XML) Windows event logging format, designated by the .evtx extension. Logs can also be stored remotely using log subscriptions.
+
+To save space, log files do not grow indefinitely. By default, Microsoft systems set a maximum log file size at 20480 Kilobytes (KB), and upon reaching that size, it deletes oldest entries first as space is needed to fill the log with more events.
+
+
+Event log entries have several fields in common:
+
+  Log Name: The name of the event log where the event is stored. Useful when processing numerous logs pulled from the same system.
+
+  Source: The service, Microsoft component, or application that generated the event.
+
+  Event Identifier (ID): A code assigned to each type of audited activity. This code is one of the most important fields in an entry, as it is by this code that complex and specific queries can be formed to examine a particular type of behavior.
+
+  Level: The severity assigned to the event in question.
+
+  User: The user account involved in triggering the activity or the user context that the source was running as when it logged the event. Note that this field often indicates System or a user that is not the cause of the event being recorded.
+
+  Operation Code (OpCode): Assigned by the source generating the log. Its meaning is left to the source.
+
+  Logged: The local system date and time when the event was logged.Task Category: Assigned by the source generating the log. Its meaning is left to the source.
+
+  Keywords: Assigned by the source and used to group or sort events.
+
+  Computer: The computer on which the event was logged. This is useful when examining logs collected from multiple systems, but should not be considered the device that caused an event(such as when a remote logon is initiated, the Computer field still shows the name of the system logging the event, not the source of the connection).
+
+  Description: A large text block where additional information specific to the event being logged is recorded. This is often the most significant field for the analyst.
+
+
+cmd command to look at events
+
+wevtutil
+
+Run the following command to show the five most recent log entries in the System log:
+
+wevtutil qe System /c:5 /f:text /rd
+
+Run the following command to return all System logs with event ID 104 (logs being cleared) — Log clear:                       <-- BAD IF YOU SEE THESE
+
+wevtutil qe System /q:"*[System[(EventID=104)]]" /f:text
+
+Run the following command to retrieve all Error level logs in the System log:
+
+wevtutil qe System /q:"*[System[(Level=2)]]" /f:text | more
+
+Run the following command to retrieve all Error and Warning level logs in the System log:
+
+wevtutil qe System /q:"*[System[(Level=2 or Level=3)]]" /f:text | more
+
+List the most recent event of the System log on remote system CDA-ACCT-1 with the command:
+
+wevtutil /r:CDA-ACCT-1 /u:"CDA\trainee" /p:"Th1s is 0perational Cyber Training!" qe System /c:1 /f:text /rd
+
+
+
+
+POWERSHELL
+
+
+Run the following command to list the number of log entries in each event log:
+
+Get-WinEvent -ListLog *
+
+Run the following command to obtain the five most recent entries in the System log:
+
+Get-WinEvent -LogName System | Select-Object -First 5
+
+Run the following command to determine how many entries in a log file are from a specific source:
+
+Get-WinEvent -LogName System | Group-Object -Property ProviderName -NoElement | Sort-Object -Property Count -Descending | Format-Table Name,Count
+
+Run the following command to obtain all errors from a specific log file:
+
+Get-WinEvent -LogName System | Where-Object -Property Level -eq 2 | Format-Table Level,Id,Message
+
+Run the following command to obtain all events in which a log file was cleared (event ID 104)
+
+Get-WinEvent -LogName System | Where-Object -Property ID -EQ 104
+
+Run the following command to obtain all logs with winlogbeat in the event description:
+
+Get-WinEvent -LogName System | Where-Object -Property Message -Match 'winlogbeat' | Format-List *
+
+Retrieve the most recent event from the System log on neighboring computer CDA-ACCT-1 with the command
+
+Invoke-Command -ComputerName CDA-ACCT-1 -ScriptBlock {Get-WinEvent -LogName System | Select-Object -First 1 | Format-List *}
+
+List the 10 most recent entries in the Task Scheduler operational log file with the command:
+
+Get-WinEvent -LogName 'Microsoft-Windows-TaskScheduler/Operational' -ErrorAction SilentlyContinue | Select-Object -First 10 | Format-List *
+
+Module Logging — Event ID 4103
+
+This policy logs pipeline execution details such as variable initialization, command invocations, some portions of scripts, some de-obfuscated code, and some data formatted for output. 
+It may not reliably capture the commands executed, but these events record valuable output not captured in other sources.
+
+Script Block Logging — Event ID 4104
+
+This policy logs entire blocks of code as they are executed, including scripts and commands. 
+It also records the decoded commands, whether obfuscated with Exclusive Or (XOR), Base64, Rotate by 13 (ROT13), encryption, etc., in addition to the original obfuscated code, as it has access to the decoded commands before the system is able to process them. However, this form of logging does not record output from the executed code.
+
+Account Creation Events
+
+Event 4720 is the event A user account was created. 
+Event 4732 is the event A member was added to a security-enabled local group.
+
+
+Event 4624 is the event An account was successfully logged on. 
+Event 4625 is the event An account failed to log on.
+Event 4672 is the event Special privileges assigned to new logon.
+Event 7030 is the event Service is marked as an interactive service.
+Event 7045 is the event A new service was installed.
+Event 4688 is the event A new process has been created.
+Event 4670 is the event Permissions on an object were changed.
+Event 4657 is the event A registry value was modified.
+
+
+
