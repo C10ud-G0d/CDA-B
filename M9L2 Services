@@ -1,0 +1,17 @@
+Services have three main names, and also can have a description of the service defined in the registry:
+  
+  Process name: The name of the running process like svchost.exe, spoolsvc.exe, or mdm.exe (seen using the tasklist /svc, Task Manager, or Process Explorer applications)
+  Internal name: Defined in the registry
+  Display name: Seen in administrative tools (optional; if not defined the internal name is used)
+
+
+Earlier lessons discussed the various object types in PowerShell and compared them to the Windows Management Instrumentation (WMI) objects and properties. 
+In order to see additional details regarding these services, like the image path of the executable, the Get-CIMInstance cmdlet is used instead of Get-Service. 
+Additionally, the service properties for CanPauseAndContinue, CanShutdown, and CanStop are displayed. The CanPauseAndContinue property indicates if the service can be paused and resumed. 
+The CanShutdown property indicates if the service should be notified when the system is shutting down. The CanStop property indicates if the service can be stopped after it has started. 
+The CanStop property can be targeted by attackers to make it very difficult to stop a malicious service after it has started, and usually requires configuring the system to not start the service on a reboot in order to completely mitigate it. 
+Services with the CanStop property set to False are usually critical services related to security that may compromise the OS if stopped.
+
+Run the following command to use WMI to view the details of the Print Spooler local service:
+
+SYNTAX Get-CIMInstance win32_service | ?{$_.Name -like '*spool*'} | select * SYNTAX
