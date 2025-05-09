@@ -1,0 +1,19 @@
+A hub has 1 broadcast domain and 1 collison domain
+
+CISCO DEVICES
+
+The basic security model for Cisco devices consists of three privilege levels: Zero, User, and Privileged. While more can be configured, these are the default. 
+The enable command can be used to raise privilege levels to 15 (Privileged), and the disable command can be used to lower the privilege levels to 1 (User). 
+An enable password can be configured to require a password in order to raise the privilege level. These commands can optionally specify a specific privilege level (0,1,15) as discussed below.
+
+Can raise privilege level by typing enable
+
+Privilege level 0 is the lowest level privilege defined by default on Cisco devices. When connected with privilege level 0, the connected user only has access to these commands:
+
+Privilege level 1. At this level — in addition to the above commands — some additional utilities are available for troubleshooting connectivity, such as the traceroute and ping commands.
+
+Privilege level 15 is the highest level defined by default on Cisco devices. At this privilege level, all commands are available, and the device can be configured.
+
+Practical Implications
+
+  
