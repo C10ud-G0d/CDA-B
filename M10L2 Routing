@@ -1,0 +1,25 @@
+AS_PATH Attribute
+Describes which autonomous systems must be routed through to reach the destination network.AS number is pre-pended to the path when sending updates from one AS to eBGP neighbor in another AS. The AS that originated the prefix advertisement is the last AS in the path.
+
+NEXT_HOP Attribute
+Gateway IP address to the next AS to reach the destination network.The IP address of the eBGP router, through which the route to the destination network is available.Attribute changes when sending prefix to another AS
+
+ORIGIN Attribute
+Identifies the origin of the routing update.
+Possible attribute value:
+IGP: NLRI learned from a protocol internal to the AS.EGP: NLRI learned from the Exterior Gateway Protocol (EGP).Incomplete: NLRI learned by other means.
+
+LOCAL_PREF Attribute
+Used to advertise preferred AS egress point to a destination network (Local Preference).This attribute is local to an AS.The attributes default value on Cisco routers is 100.The egress point with the highest Local Preference is preferred.If an external BGP neighbor receives an update with a local preference set, it ignores the attribute.
+
+ATOMIC_AGGREGATE Attribute
+Informs downstream routers that a loss of path information has occurredBGP router must attach the attribute to an aggregate route any time a BGP speaker summarizes more specific routes (e.g., 100.0.1.0/24) into a less specific aggregate (e.g., 100.0.0.0/22), and the path information is lost.
+
+AGGREGATOR Attribute
+AGGREGATOR attribute can be attached to an ATOMIC_AGGREGATE attribute informing BGP routers where the prefix aggregation occurred.AGGREGATOR attribute includes the AS and the IP address of the router that originated the aggregate route.
+
+COMMUNITY Attribute
+Route taggingPredefined values.Attribute needs to be configured for it to be sent to the BGP neighborOne of the possible applications is to control incoming traffic
+
+
+
