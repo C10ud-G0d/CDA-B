@@ -1,0 +1,6 @@
+File: Statistics about the capture file such as name, length, and formatTime: Duration of the capture file
+Capture: Computer hardware statistics of the workstation Wireshark is utilizing
+Interfaces: Interface registry ID, capture filters, and packet size limit
+Statistics: General capture statistics of the file
+
+
