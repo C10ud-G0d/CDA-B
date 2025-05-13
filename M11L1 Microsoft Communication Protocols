@@ -1,0 +1,5 @@
+NetBIOS and RPC communication can also be analyzed in Kibana using the event.dataset.keyword: dce_rpc filter.
+
+The SMB protocol is a network file and resource sharing protocol that was originally introduced in the 1980s with SMBv1. 
+Since then, the SMB protocol has evolved multiple times and seen more recent versions that include end-to-end SMB encryption — introduced in SMBv3 for Windows 8 and Server 2012. 
+
