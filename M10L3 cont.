@@ -1,0 +1,10 @@
+TrickBot uses port 8082
+
+codes for trickbot
+  81: Cached password data from the system, web browsers, email clients, etc.
+  83: Browser form data submitted by applications
+  90: System information
+
+By following the TCP stream it can be seen that a malicious executable file is being masked as a .png image file. 
+This is evident as the first two bytes are those of an .exe file. In ASCII, this is displayed as MZ, which represents an executable and negates the Content-Type of .png.
+
