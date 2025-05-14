@@ -1,0 +1,48 @@
+VLANS logically break or segment networks
+
+IN BAND is physical connection
+
+OUT of BAND is connected to SPAN port logically
+
+RSPAN is on same domain
+
+ERSPAN is on multiple domains
+
+Port security maximum vlan access
+
+Primary routing protocols
+
+OSPF 
+  Builds link state database based off of all connection points 
+  If all routers have the same info in their database instead of being neighbors they're adjacent neighbors
+  neighbors just route data through 
+
+  Cost: speed higher the speed cheaper the cost 
+  OSPF goes for higher speed
+
+  
+
+BGP
+  AS: ATT&T, Verizion, T Mobile, etc
+
+  Used externally to connect multiple AS together
+
+
+AS_PATH 
+  READ RIGHT TO LEFT
+
+SMB
+
+  default shares
+  C$
+  IPC
+
+NBTSTAT shows what share are availible tells us standalone device and what domains it belongs too
+
+IPS: changes and detects
+IDS: detects
+firewalls: prevents
+
+network IPS: located on the network
+
+NMAP Is your friend
