@@ -1,0 +1,20 @@
+
+Data Aggregation
+  SIEMs aggregate and consolidate data from across the enterprise’s network devices and endpoints. Each node on the network continually processes large amounts of data. A SIEM is able to aggregate the data being processed.
+
+Data Normalization
+  Aggregated data often has disparities and different fields. Data normalization is the process of structuring data commonly found in a relational database or SIEM. 
+  The data is structured in accordance with a series of normal forms. The normal forms are filters designed to reduce data redundancy and improve data integrity. 
+  
+  The filters process the data by organizing it to avoid:
+      Data Redundancy: Unintentional occurrence of the same piece of data being held in two separate places
+      Insertion Anomaly: Inability to add data to the database or SIEM due to absence of other data
+      Update Anomaly: Data inconsistency that results from data redundancy
+      Deletion Anomaly: Unintended loss of data due to deletion of other data
+
+Centralized Dashboard
+  SIEMs aggregate and consolidate data from across the enterprise’s network devices and endpoints into one centralized dashboard. 
+  The dashboard is updated in realtime and allows an analyst to see a live snapshot of the enterprise. A sample dashboard is provided in Figure 13.1-2:
+
+
+
