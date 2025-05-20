@@ -1,0 +1,48 @@
+accesschk "Domain\user" -a *
+
+auditpol.exe /get /category:*
+
+GPM -> Name of GPO --> enforced
+
+LSP -> Local
+
+RSOP.msc -> using RSOP
+
+
+Directory services = Domain Services
+
+A directory is a hierarchical structure that stores information about objects on the network. 
+A directory service, such as AD DS, provides the methods for storing directory data and making
+this data available to network users and administrators.
+
+
+KEY TERMS:
+  
+  Schema: The set of user-configured rules that govern objects and attributes in AD DS.
+  
+  Global Catalog: The container for all objects in AD DS. For example, a name associated with a user or a computer is stored in the global catalog.
+  
+  Query and Index Mechanism: This system allows users to find each other in AD. A good example would be when typing a name in the mail client, and the mail client shows possible matches.
+  
+  Replication Service: The replication service makes sure that every DC on the network has the same Global Catalog and Schema.
+  
+  Sites: Sites are representations of the network topology, so AD DS knows which objects go together to optimize replication and indexing.
+
+  Lightweight Directory Access Protocol (LDAP): LDAP is an industry-standard application protocol that allows AD to communicate with other LDAP-enabled directory services across platforms. 
+                                                Example of its use includes creating a centralized management of AD users for validating access to various applications and services.
+
+
+Also note that the logs required to perform an investigation, may not be configured or accessible in a default environment.
+
+
+GPO
+ GPO is a collection of Group Policy settings that define what a system looks like and how it behaves for a defined group of users. Every GPO has two parts: a user configuration and a computer configuration.
+
+  Computer-related policies specify system behavior, application settings, security settings, assigned applications, and computer startup and shutdown scripts.
+
+  User-related policies specify system behavior, application settings, security settings, assigned and published applications, user logon and logoff scripts, and folder redirection.
+
+    Objects can span the entire enterprise made up of Organizational Units (OU), domains, trees, and forests. 
+    OUs can be linked directly to GPOs making enterprise management simpler. An OU is the lowest unit that GPOs 
+    can be applied to and is a subdivision within an AD that can hold users, groups, and computers.
+
